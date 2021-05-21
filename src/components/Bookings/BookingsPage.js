@@ -1,10 +1,14 @@
-import WeekPicker from "./WeekPicker";
+import { useState } from "react";
+import BookablesList from "../Bookables/BookablesList";
+import Bookings from "./Bookings";
 
 export default function BookingsPage() {
+  const [bookable, setBookable] = useState(null);
+
   return (
-    <main>
-      <p>Bookings!</p>
-      <WeekPicker date={new Date()} />
+    <main className="bookings-page">
+      <BookablesList bookable={bookable} setBookable={setBookable} />
+      <Bookings bookable={bookable} />
     </main>
   );
 }
