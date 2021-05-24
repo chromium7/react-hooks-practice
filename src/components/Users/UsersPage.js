@@ -5,7 +5,7 @@ import UserContext from "./UserContext";
 
 export default function UsersPage() {
   const [user, setUser] = useState();
-  const { user: loggedInUser } = useContext(UserContext);
+  const loggedInUser = useContext(UserContext);
   const currentUser = user || loggedInUser;
   return (
     <main className="users-page">
