@@ -1,13 +1,18 @@
 import { useEffect } from "react";
+import { useQuery } from "react-query";
 import Spinner from "../UI/Spinner";
 
-import useFetch from "../../utils/useFetch";
+import getData from "../../utils/api";
 import { useUser } from "./UserContext";
 
 export default function UserPicker() {
   const [user, setUser] = useUser();
 
-  const { data: users = [], status, error } = useFetch("http://localhost:3001/users");
+  const {
+    data: users = [],
+    status,
+    error,
+  } = useQuery("users", () => getData("http://localhost:3001/users"));
 
   useEffect(() => {
     setUser(users[0]);
@@ -25,7 +30,7 @@ export default function UserPicker() {
   }
 
   if (status === "error") {
-    return <span>Error!</span>;
+    return <span>{error.message}</span>;
   }
 
   return (

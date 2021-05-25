@@ -1,4 +1,5 @@
-import useFetch from "../../utils/useFetch";
+import { useQuery } from "react-query";
+import getData from "../../utils/api";
 import { shortISO } from "../../utils/date-wrangler";
 import { useBookingsParams } from "./bookingsHooks";
 
@@ -7,7 +8,11 @@ import Bookings from "./Bookings";
 import PageSpinner from "../UI/PageSpinner";
 
 export default function BookingsPage() {
-  const { data: bookables = [], status, error } = useFetch("http://localhost:3001/bookables");
+  const {
+    data: bookables = [],
+    status,
+    error,
+  } = useQuery("bookables", () => getData("http://localhost:3001/bookables"));
 
   const { date, bookableId } = useBookingsParams();
 
