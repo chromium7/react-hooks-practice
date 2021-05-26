@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { FaCloudUploadAlt, FaCloudUploatAlt, FaTrash, FaWindowClose } from "react-icons/fa";
+import { FaCloudUploadAlt, FaTrash, FaWindowClose } from "react-icons/fa";
 import { days as daysArray, sessions as sessionsArray } from "../../static.json";
 
 export default function BookableForm({ formState = {}, handleSubmit, handleDelete }) {

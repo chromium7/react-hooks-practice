@@ -15,7 +15,7 @@ export default function BookableEdit() {
     ["bookable", id],
     () => getData(`http://localhost:3001/bookables/${id}`),
     {
-      initialData: queryClient.getQueryData("bookables")?.find((b) => b.id == parseInt(id, 10)),
+      initialData: queryClient.getQueryData("bookables")?.find((b) => b.id === parseInt(id, 10)),
     },
   );
 
