@@ -1,30 +1,33 @@
 import { useParams } from "react-router-dom";
-import { useQueryClient, useQuery } from "react-query";
-
 import useFormState from "./useFormState";
-import getData from "../../utils/api";
-
 import BookableForm from "./BookableForm";
 import PageSpinner from "../UI/PageSpinner";
 
+import { useUpdateBookable, useDeleteBookable, useBookable } from "./bookableHooks";
+
 export default function BookableEdit() {
   const { id } = useParams();
-  const queryClient = useQueryClient();
-
-  const { data, isLoading } = useQuery(
-    ["bookable", id],
-    () => getData(`http://localhost:3001/bookables/${id}`),
-    {
-      initialData: queryClient.getQueryData("bookables")?.find((b) => b.id === parseInt(id, 10)),
-    },
-  );
+  const { data, isLoading } = useBookable(id);
 
   const formState = useFormState(data);
 
-  function handleDelete() {}
-  function handleSubmit() {}
+  const { updateBookable, isUpdate, isUpdateError, updateError } = useUpdateBookable();
+  const { deleteBookable, isDelete, isDeleteError, deleteError } = useDeleteBookable();
 
-  if (isLoading) {
+  function handleDelete() {
+    if (window.confirm("Are you sure you want to delete the bookable?")) {
+      deleteBookable(formState.state);
+    }
+  }
+  function handleSubmit() {
+    updateBookable(formState.state);
+  }
+
+  if (isUpdateError || isDeleteError) {
+    return <p>{updateError?.message || deleteError.message}</p>;
+  }
+
+  if (isLoading || isUpdate || isDelete) {
     return <PageSpinner />;
   }
 

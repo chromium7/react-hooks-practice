@@ -9,11 +9,11 @@ export default function UsersList({ user, setUser }) {
     error,
   } = useQuery("users", () => getData("http://localhost:3001/users"));
 
-  if (status == "error") {
+  if (status === "error") {
     return <p>{error.message}</p>;
   }
 
-  if (status == "loading") {
+  if (status === "loading") {
     return (
       <p>
         <Spinner /> Loading...
