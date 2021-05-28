@@ -3,7 +3,7 @@ import { getWeek, shortISO } from "../../utils/date-wrangler";
 import { useBookingsParams, useBookings } from "./bookingsHooks";
 
 import WeekPicker from "./WeekPicker";
-import BookingsGrid from "./BookingsGrid";
+import BookingsGridSlide from "./BookingsGridSlide";
 import BookingDetails from "./BookingDetails";
 
 export default function Bookings({ bookable }) {
@@ -29,7 +29,12 @@ export default function Bookings({ bookable }) {
     <div className="bookings">
       <div>
         <WeekPicker />
-        <BookingsGrid week={week} bookable={bookable} booking={booking} setBooking={setBooking} />
+        <BookingsGridSlide
+          week={week}
+          bookable={bookable}
+          booking={booking}
+          setBooking={setBooking}
+        />
       </div>
       <BookingDetails booking={selectedBooking || booking} bookable={bookable} />
     </div>
