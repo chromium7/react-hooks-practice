@@ -19,6 +19,12 @@ export default function Bookings({ bookable }) {
     setBooking(null);
   }, [bookable, weekStart]);
 
+  useEffect(() => {
+    if (booking?.id !== undefined && !selectedBooking) {
+      setBooking(null);
+    }
+  }, [booking, selectedBooking]);
+
   return (
     <div className="bookings">
       <div>
