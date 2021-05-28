@@ -1,15 +1,17 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import "../App.css";
 
 import { FaCalendarAlt, FaDoorOpen, FaUsers } from "react-icons/fa";
-
-import BookablesPage from "./Bookables/BookablesPage";
-import BookingsPage from "./Bookings/BookingsPage";
-import UsersPage from "./Users/UsersPage";
 import UserPicker from "./Users/UserPicker";
 import { UserProvider } from "./Users/UserContext";
+import PageSpinner from "./UI/PageSpinner";
+
+const BookablesPage = lazy(() => import("./Bookables/BookablesPage"));
+const BookingsPage = lazy(() => import("./Bookings/BookingsPage"));
+const UsersPage = lazy(() => import("./Users/UsersPage"));
 
 const queryClient = new QueryClient();
 
@@ -45,11 +47,13 @@ export default function App() {
               <UserPicker />
             </header>
 
-            <Routes>
-              <Route path="/bookings" element={<BookingsPage />} />
-              <Route path="/bookables/*" element={<BookablesPage />} />
-              <Route path="/users" element={<UsersPage />} />
-            </Routes>
+            <Suspense fallback={<PageSpinner />}>
+              <Routes>
+                <Route path="/bookings" element={<BookingsPage />} />
+                <Route path="/bookables/*" element={<BookablesPage />} />
+                <Route path="/users" element={<UsersPage />} />
+              </Routes>
+            </Suspense>
           </div>
         </Router>
       </UserProvider>
