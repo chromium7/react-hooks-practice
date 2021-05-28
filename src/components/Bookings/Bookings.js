@@ -5,6 +5,8 @@ import { useBookingsParams, useBookings } from "./bookingsHooks";
 import WeekPicker from "./WeekPicker";
 import BookingsGridSlide from "./BookingsGridSlide";
 import BookingDetails from "./BookingDetails";
+import BookingsGrid from "./BookingsGrid";
+// import BookingsGrid from "./BookingsGrid";
 
 export default function Bookings({ bookable }) {
   const [booking, setBooking] = useState(null);
@@ -29,12 +31,13 @@ export default function Bookings({ bookable }) {
     <div className="bookings">
       <div>
         <WeekPicker />
-        <BookingsGridSlide
+        {/* <BookingsGridSlide
           week={week}
           bookable={bookable}
           booking={booking}
           setBooking={setBooking}
-        />
+        /> */}
+        <BookingsGrid week={week} bookable={bookable} booking={booking} setBooking={setBooking} />
       </div>
       <BookingDetails booking={selectedBooking || booking} bookable={bookable} />
     </div>

@@ -7,7 +7,7 @@ export default function BookingsGrid({ week, bookable, booking, setBooking }) {
   const { grid, sessions, dates } = useGrid(bookable, week.start);
 
   function cell(session, date) {
-    const cellData = bookings[session]?.[date] || grid[session][date];
+    const cellData = bookings?.[session]?.[date] || grid[session][date];
     const isSelected = booking?.session === session && booking?.date === date;
     return (
       <td
