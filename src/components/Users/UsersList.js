@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import Spinner from "../UI/Spinner";
 import getData from "../../utils/api";
 
 export default function UsersList({ user, setUser }) {
