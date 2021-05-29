@@ -10,9 +10,11 @@ import PageSpinner from "../UI/PageSpinner";
 export default function BookingsPage() {
   const {
     data: bookables = [],
-    status,
-    error,
-  } = useQuery("bookables", () => getData("http://localhost:3001/bookables"));
+    // status,
+    // error,
+  } = useQuery("bookables", () => getData("http://localhost:3001/bookables"), {
+    suspense: true,
+  });
 
   const { date, bookableId } = useBookingsParams();
 
@@ -23,12 +25,12 @@ export default function BookingsPage() {
     return date ? `${root}&date=${shortISO(date)}` : root;
   }
 
-  if (status === "error") {
-    return <p>{error.message}</p>;
-  }
-  if (status === "loading") {
-    return <PageSpinner />;
-  }
+  // if (status === "error") {
+  //   return <p>{error.message}</p>;
+  // }
+  // if (status === "loading") {
+  //   return <PageSpinner />;
+  // }
 
   return (
     <main className="bookings-page">

@@ -40,19 +40,21 @@ import PageSpinner from "../UI/PageSpinner";
 export default function BookablesView() {
   const {
     data: bookables = [],
-    status,
-    error,
-  } = useQuery("bookables", () => getData("http://localhost:3001/bookables"));
+    // status,
+    // error,
+  } = useQuery("bookables", () => getData("http://localhost:3001/bookables"), {
+    suspense: true,
+  });
 
   const { id } = useParams();
   const bookable = bookables.find((b) => b.id === parseInt(id, 10)) || bookables[0];
 
-  if (status === "error") {
-    return <p>{error.message}</p>;
-  }
-  if (status === "loading") {
-    return <PageSpinner />;
-  }
+  // if (status === "error") {
+  //   return <p>{error.message}</p>;
+  // }
+  // if (status === "loading") {
+  //   return <PageSpinner />;
+  // }
   return (
     <main className="bookables-page">
       <div>
